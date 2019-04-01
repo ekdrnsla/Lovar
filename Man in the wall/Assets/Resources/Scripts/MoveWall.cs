@@ -5,25 +5,26 @@ using UnityEngine;
 public class MoveWall : MonoBehaviour
 {
     public float speed;
+    Vector3 oriPos;
     bool isWait = true;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        oriPos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetButton("Jump"))
             isWait = false;
 
         if (transform.position.z > -3 && !isWait)
-            gameObject.GetComponent<Rigidbody>().velocity = Vector3.back * speed * Time.deltaTime;
+            gameObject.GetComponent<Rigidbody>().velocity = Vector3.back * speed;
         else
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, 19);
+            transform.position = oriPos;
             isWait = true;
         }
     }
