@@ -23,7 +23,7 @@ public class CreateWall : MonoBehaviour
 
         // for(int i = 0; i < getData.vertices.Length; i++) Debug.Log(getData.vertices[i]);
         UpdateMesh();
-        GL.wireframe = true;
+        transform.SetPositionAndRotation(new Vector3(-getData.wallWidth / 2, getData.wallHeight / 2, 0), Quaternion.Euler(180, 0, 0));
     }
 
     // Update is called once per frame
@@ -41,75 +41,6 @@ public class CreateWall : MonoBehaviour
     {
 
     }
-
-    // void UpdateVectors()
-    // {
-    //     vertices = new Vector3[]
-    //     {
-    //         //앞
-    //         new Vector3(-1, 1, -1), //좌상
-    //         new Vector3(1, 1, -1), //우상
-    //         new Vector3(1, -1, -1), //우하
-    //         new Vector3(-1, -1, -1), //좌하
-
-    //         //왼
-    //         new Vector3(1, 1, -1), //좌상
-    //         new Vector3(1, 1, 1), //우상
-    //         new Vector3(1, -1, 1), //우하
-    //         new Vector3(1, -1, -1), //좌하
-
-    //         //뒤
-    //         new Vector3(1, 1, 1), //좌상
-    //         new Vector3(-1, 1, 1), //우상
-    //         new Vector3(-1, -1, 1), //우하
-    //         new Vector3(1, -1, 1), //좌하
-
-    //         //오
-    //         new Vector3(-1, 1, 1), //좌상
-    //         new Vector3(-1, 1, -1), //우상
-    //         new Vector3(-1, -1, -1), //우하
-    //         new Vector3(-1, -1, 1), //좌하
-
-    //         //위
-    //         new Vector3(-1, 1, 1), //좌상
-    //         new Vector3(1, 1, 1), //우상
-    //         new Vector3(1, 1, -1), //우하
-    //         new Vector3(-1, 1, -1), //좌하
-
-    //         //아래
-    //         new Vector3(-1, -1, -1), //좌상
-    //         new Vector3(1, -1, -1), //우상
-    //         new Vector3(1, -1, 1), //우하
-    //         new Vector3(-1, -1, 1), //좌하
-    //     };
-
-    //     triangles = new int[]
-    //     {
-    //         //앞
-    //         0, 1, 2,
-    //         2, 3, 0,
-
-    //         //왼
-    //         4, 5, 6,
-    //         6, 7, 4,
-
-    //         //뒤
-    //         8, 9, 10,
-    //         10, 11, 8,
-
-    //         //오
-    //         12, 13, 14,
-    //         14, 15, 12,
-
-    //         //위
-    //         16, 17, 18,
-    //         18, 19, 16,
-
-    //         //아래
-    //         20, 21, 22,
-    //         22, 23, 20
-    //     };
-    // }
 
     void UpdateMesh()
     {

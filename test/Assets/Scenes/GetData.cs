@@ -20,6 +20,8 @@ public class GetData : MonoBehaviour
 
     int shapeWidth = 20;
     int shapeHeight;
+    public int wallWidth = 70;
+    public int wallHeight = 50;
     // int[] borderIndex;
 
     int[] maxBorder; //ULDR
@@ -82,7 +84,7 @@ public class GetData : MonoBehaviour
 
         getGapSortedVectorList();
 
-        getMaxBorder();
+        // getMaxBorder();
 
         // Vector3 previousV;
         // Vector3 currentV;
@@ -99,7 +101,8 @@ public class GetData : MonoBehaviour
         // int baseIndex = 0;
         // Vector3 baseVector = GapSortedVectorList[baseIndex];
 
-        getBorderAndInnerIndex();
+        // getBorderAndInnerIndex();
+        getFinalVectorList();
         // sortIndexList.Add(0);
         // Vector3 previousVector;
         // Vector3 currentVector;
@@ -187,7 +190,7 @@ public class GetData : MonoBehaviour
         //     else vectorList.RemoveRange(index: vectorList.Count - 2, count: 2);
         // }
 
-        if (vectorList.Count < 2) return;
+        // if (vectorList.Count < 2) return;
 
         getTriangle();
 
@@ -296,22 +299,22 @@ public class GetData : MonoBehaviour
         // if (i % 2 == 0) GapSortedVectorList.Add(sortedVectorList[i]);
     }
 
-    void getMaxBorder()
-    {
-        // List<Vector3> sort = new List<Vector3>();
-        // sort = GapSortedVectorList;
-        // sort.Sort((x, y) => y.x.CompareTo(x.x));
-        // maxBorder[1] = sort[1].x;
+    // void getMaxBorder()
+    // {
+    // List<Vector3> sort = new List<Vector3>();
+    // sort = GapSortedVectorList;
+    // sort.Sort((x, y) => y.x.CompareTo(x.x));
+    // maxBorder[1] = sort[1].x;
 
-        // Debug.Log(maxBorder[1]);
-        // Vector3 previousVector = sortedVectorList[sortedVectorList.Count - 2];
-        // Vector3 currentVector = sortedVectorList[sortedVectorList.Count - 1];
-        // if (previousVector.y >= currentVector.y) borderMax[0] = currentVector.y;
-        // else if (previousVector.x >= currentVector.x) borderMax[1] = currentVector.x;
-        // else if (previousVector.y <= currentVector.y) borderMax[2] = currentVector.y;
-        // else if (previousVector.x <= currentVector.x) borderMax[3] = currentVector.x;
-        // for (int i = 0; i < borderMax.Length; i++) Debug.Log(borderMax[i]);
-    }
+    // Debug.Log(maxBorder[1]);
+    // Vector3 previousVector = sortedVectorList[sortedVectorList.Count - 2];
+    // Vector3 currentVector = sortedVectorList[sortedVectorList.Count - 1];
+    // if (previousVector.y >= currentVector.y) borderMax[0] = currentVector.y;
+    // else if (previousVector.x >= currentVector.x) borderMax[1] = currentVector.x;
+    // else if (previousVector.y <= currentVector.y) borderMax[2] = currentVector.y;
+    // else if (previousVector.x <= currentVector.x) borderMax[3] = currentVector.x;
+    // for (int i = 0; i < borderMax.Length; i++) Debug.Log(borderMax[i]);
+    // }
 
     void addNearVectorList(float currentX, float currentY, int x, int y)
     {
@@ -333,20 +336,26 @@ public class GetData : MonoBehaviour
 
 
         // borderAndInnerIndex[0].Add(0);
-        float minX, minY;
+        float limitX, limitY;
         // Vector3 baseVector;
         // Vector3 previousVector;
         // Vector3 currentVector;
-        minX = GapSortedVectorList[0].x;
-        minY = GapSortedVectorList[0].y;
+        limitX = GapSortedVectorList[0].x;
+        limitY = GapSortedVectorList[0].y;
         for (int i = 0; i < GapSortedVectorList.Count; i++)
         {
-            if (GapSortedVectorList[i].x <= minX && GapSortedVectorList[i].y >= minY)
+            if (GapSortedVectorList[i].x <= limitX && GapSortedVectorList[i].y >= limitY)
             {
                 borderAndInnerIndex[0].Add(i);
-                minX = GapSortedVectorList[i].x;
-                minY = GapSortedVectorList[i].y;
+                limitX = GapSortedVectorList[i].x;
+                limitY = GapSortedVectorList[i].y;
             }
+            // else if (GapSortedVectorList[i].y <= minY)
+            // {
+            //     borderAndInnerIndex[0].RemoveRange(1, borderAndInnerIndex[0].Count - 1);
+            //     borderAndInnerIndex[0].Add(i);
+            //     minY = GapSortedVectorList[i].y;
+            // }
 
             // baseVector = GapSortedVectorList[borderAndInnerIndex[0].Count - 1];
             // previousVector = GapSortedVectorList[i - 1];
@@ -358,21 +367,49 @@ public class GetData : MonoBehaviour
 
         for (int i = borderAndInnerIndex[0][borderAndInnerIndex[0].Count - 1]; i < GapSortedVectorList.Count; i++)
         {
-            if (GapSortedVectorList[i].x >= minX && GapSortedVectorList[i].y >= minY)
+            if (GapSortedVectorList[i].x >= limitX && GapSortedVectorList[i].y >= limitY)
             {
                 borderAndInnerIndex[1].Add(i);
-                minX = GapSortedVectorList[i].x;
-                minY = GapSortedVectorList[i].y;
+                limitX = GapSortedVectorList[i].x;
+                limitY = GapSortedVectorList[i].y;
             }
+            // else if (GapSortedVectorList[i].x <= minX)
+            // {
+            //     borderAndInnerIndex[1].RemoveRange(1, borderAndInnerIndex[1].Count - 1);
+            //     borderAndInnerIndex[1].Add(i);
+            //     minX = GapSortedVectorList[i].x;
+            // }
         }
 
         for (int i = borderAndInnerIndex[1][borderAndInnerIndex[1].Count - 1]; i < GapSortedVectorList.Count; i++)
         {
-            if (GapSortedVectorList[i].x >= minX && GapSortedVectorList[i].y <= minY)
+            if (GapSortedVectorList[i].x >= limitX && GapSortedVectorList[i].y <= limitY)
             {
                 borderAndInnerIndex[2].Add(i);
-                minX = GapSortedVectorList[i].x;
-                minY = GapSortedVectorList[i].y;
+                limitX = GapSortedVectorList[i].x;
+                limitY = GapSortedVectorList[i].y;
+            }
+            else if (GapSortedVectorList[i].y >= limitY)
+            {
+                borderAndInnerIndex[2].RemoveRange(1, borderAndInnerIndex[2].Count - 1);
+                borderAndInnerIndex[2].Add(i);
+                limitY = GapSortedVectorList[i].y;
+            }
+        }
+
+        for (int i = borderAndInnerIndex[2][borderAndInnerIndex[2].Count - 1]; i < GapSortedVectorList.Count; i++)
+        {
+            if (GapSortedVectorList[i].x <= limitX && GapSortedVectorList[i].y <= limitY)
+            {
+                borderAndInnerIndex[3].Add(i);
+                limitX = GapSortedVectorList[i].x;
+                limitY = GapSortedVectorList[i].y;
+            }
+            else if (GapSortedVectorList[i].x >= limitX)
+            {
+                borderAndInnerIndex[3].RemoveRange(1, borderAndInnerIndex[3].Count - 1);
+                borderAndInnerIndex[3].Add(i);
+                limitX = GapSortedVectorList[i].x;
             }
         }
 
@@ -417,7 +454,7 @@ public class GetData : MonoBehaviour
 
         // for (int i = 0; i < borderAndInnerIndex[0].Count; i++) Debug.Log(borderAndInnerIndex[0][i]);
         // for (int i = 0; i < borderAndInnerIndex[1].Count; i++) Debug.Log(borderAndInnerIndex[1][i]);
-        for (int i = 0; i < borderAndInnerIndex[2].Count; i++) Debug.Log(borderAndInnerIndex[2][i]);
+        // for (int i = 0; i < borderAndInnerIndex[2].Count; i++) Debug.Log(borderAndInnerIndex[2][i]);
         // for (int i = 0; i < borderAndInnerIndex[3].Count; i++) Debug.Log(borderAndInnerIndex[3][i]);
 
         // for(int i = 0 ; i < borderAndInnerIndex[1][0]; i++){
@@ -434,18 +471,86 @@ public class GetData : MonoBehaviour
         // }
 
 
-        for (int i = 0; i < borderAndInnerIndex[0].Count; i++)
-        {
-            finalVectorList.Add(GapSortedVectorList[borderAndInnerIndex[0][i]]);
-        }
+
+    }
+
+    void getFinalVectorList()
+    {
+        getBorderAndInnerIndex();
+        finalVectorList = GapSortedVectorList;
+        finalVectorList.Add(new Vector3(-wallWidth / 2 - 1, -wallHeight / 2 - 1));
+        finalVectorList.Add(new Vector3(-wallWidth / 2 - 1, wallHeight / 2 - 1));
+        finalVectorList.Add(new Vector3(wallWidth / 2 - 1, wallHeight / 2 - 1));
+        finalVectorList.Add(new Vector3(wallWidth / 2 - 1, -wallHeight / 2 - 1));
+        // finalVectorList.Add(new Vector3(-wallWidth/2 -1, 0));
+        // finalVectorList.Add(new Vector3(-wallWidth/2 -1, wallHeight - 1));
+        // finalVectorList.Add(new Vector3(wallWidth/2 -1, wallHeight - 1));
+        // finalVectorList.Add(new Vector3(wallWidth/2 -1, 0));
+
+        // finalVectorList.Add(new Vector3(0, 0));
+        // finalVectorList.Add(new Vector3(0, shapeHeight - 1));
+        // finalVectorList.Add(new Vector3(shapeHeight - 1, shapeHeight - 1));
+        // finalVectorList.Add(new Vector3(shapeHeight - 1, 0));
     }
 
     void getTriangle()
     {
-        // vertices = GapSortedVectorList.ToArray();
-        // vertices = finalVectorList.ToArray();
-        // triangles = new int[(sortedVectorList.Count - 2) * 3];
+        if (finalVectorList.Count < 5) return;
+        vertices = finalVectorList.ToArray();
+        // vertices = new Vector3[10]{new Vector3(0, 0, 0), new Vector3(1, 1, 0), new Vector3(1, 0, 0), new Vector3(1, -1, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0)};
+        triangles = new int[(vertices.Length - 5) * 3];
 
+        int index = 0;
+        for (int i = 0; i < borderAndInnerIndex[0].Count - 1; i++)
+        {
+            triangles[index] = vertices.Length - 4;
+            triangles[index + 1] = borderAndInnerIndex[0][i];
+            triangles[index + 2] = borderAndInnerIndex[0][i + 1];
+            index += 3;
+        }
+
+        for (int i = 0; i < borderAndInnerIndex[1].Count - 1; i++)
+        {
+            triangles[index] = vertices.Length - 3;
+            triangles[index + 1] = borderAndInnerIndex[1][i];
+            triangles[index + 2] = borderAndInnerIndex[1][i + 1];
+            index += 3;
+        }
+
+        for (int i = 0; i < borderAndInnerIndex[2].Count - 1; i++)
+        {
+            triangles[index] = vertices.Length - 2;
+            triangles[index + 1] = borderAndInnerIndex[2][i];
+            triangles[index + 2] = borderAndInnerIndex[2][i + 1];
+            index += 3;
+        }
+
+        for (int i = 0; i < borderAndInnerIndex[3].Count - 1; i++)
+        {
+            triangles[index] = vertices.Length - 1;
+            triangles[index + 1] = borderAndInnerIndex[3][i];
+            triangles[index + 2] = borderAndInnerIndex[3][i + 1];
+            index += 3;
+        }
+
+        // triangles[index] = vertices.Length - 4;
+        // triangles[index + 1] = vertices.Length - 3;
+        // triangles[index + 2] = vertices.Length - 2;
+        // triangles[index + 3] = vertices.Length - 1;
+
+
+
+        for (int i = 0; i < triangles.Length; i++) Debug.Log(triangles[i]);
+
+
+        // for (int i = 0; i < borderAndInnerIndex[0].Count; i += 3)
+        // {
+        //     triangles[i] = vertices.Length-4;
+        //     triangles[i + 1] = borderAndInnerIndex[0][i];
+        //     triangles[i + 2] = borderAndInnerIndex[0][i + 1];
+        // }
+
+        // for(int i = 0; i < triangles.Length; i++) Debug.Log(triangles[i]);
 
         // triangles[0] = 0;
         // triangles[1] = 1;
