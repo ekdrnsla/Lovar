@@ -5,20 +5,23 @@ using System.IO;
 
 public class CreateWall : MonoBehaviour
 {
-    public GameObject obj;
+    public GameObject prefab;
+    public string fileName;
     public float scale;
     string[] values;
-    GameObject positionObject;
+    public GameObject _wallObject;
+    float YPos;
 
     void Start()
     {
-        positionObject = new GameObject("_position");
-        Parse();
+        YPos = GetComponentInParent<Transform>().position.y;
     }
 
     public void Parse()
     {
-        TextAsset data = Resources.Load("Data/data") as TextAsset;
+        _wallObject = new GameObject("_wall");
+
+        TextAsset data = Resources.Load("Data/" + fileName) as TextAsset;
         StringReader sr = new StringReader(data.text);
 
         int y = 0;
@@ -35,11 +38,10 @@ public class CreateWall : MonoBehaviour
             {
                 if (values[x] != null && values[x] == "0")
                 {
-                    var Object = Instantiate(obj, new Vector3(x, y, 0), Quaternion.identity);
-                    Object.transform.SetParent(positionObject.transform);
+                    var Object = Instantiate(prefab, new Vector3(x, y, 0), Quaternion.identity);
+                    Object.transform.SetParent(_wallObject.transform);
                 }
             }
-
 
             if (values.Length == 0)
             {
@@ -49,13 +51,8 @@ public class CreateWall : MonoBehaviour
             source = sr.ReadLine();    // 한줄 읽는다.
             y--;
         }
-        positionObject.transform.SetParent(transform);
-        positionObject.transform.position = new Vector3(-values.Length / 2 * scale, transform.position.y + -y * scale, transform.position.z);
-        positionObject.transform.localScale = new Vector3(scale, scale, scale);
-    }
-
-    void Update()
-    {
-
+        _wallObject.transform.SetParent(transform);
+        _wallObject.transform.position = new Vector3(-values.Length / 2 * scale, -y * scale + YPos, transform.position.z);
+        _wallObject.transform.localScale = new Vector3(scale, scale, scale);
     }
 }

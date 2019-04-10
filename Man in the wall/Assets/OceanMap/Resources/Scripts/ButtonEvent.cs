@@ -39,6 +39,7 @@ public class ButtonEvent : MonoBehaviour
             menu.SetActive(false);
             maps.SetActive(true);
             GameObject.Find("Man in the Wall").GetComponent<Text>().text = "Select Map";
+            GameObject.Find("Man in the Wall").transform.Translate(0, 80, 0);
             return;
         }
         else if (_buttonName == "back")
@@ -46,6 +47,7 @@ public class ButtonEvent : MonoBehaviour
             menu.SetActive(true);
             maps.SetActive(false);
             GameObject.Find("Man in the Wall").GetComponent<Text>().text = "Man in the Wall";
+            GameObject.Find("Man in the Wall").transform.Translate(0, -80, 0);
             return;
         }
         else if (_buttonName == "exit")

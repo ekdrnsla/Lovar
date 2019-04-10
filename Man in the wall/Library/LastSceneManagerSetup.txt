@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/OceanMap/Resources/Sceness/Start.unity
+- path: Assets/OceanMap/Resources/Sceness/OceanMap.unity
   isLoaded: 1
   isActive: 1

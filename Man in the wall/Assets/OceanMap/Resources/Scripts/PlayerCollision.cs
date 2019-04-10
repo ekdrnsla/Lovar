@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerCollision : MonoBehaviour
 {
     Vector3 oriPos;
-    float limit = 30;
+    public float limit = 20;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +16,7 @@ public class PlayerCollision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x < -limit || transform.position.y > limit || transform.position.y < -limit || transform.position.z < -limit || transform.position.z > limit)
+        if (transform.position.x < -limit || transform.position.x > limit || transform.position.y < -limit || transform.position.z < -limit || transform.position.z > limit)
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
