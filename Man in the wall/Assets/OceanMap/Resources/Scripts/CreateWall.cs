@@ -17,7 +17,7 @@ public class CreateWall : MonoBehaviour
         YPos = GetComponentInParent<Transform>().position.y;
     }
 
-    public void Parse()
+    public bool Parse()
     {
         _wallObject = new GameObject("_wall");
 
@@ -46,7 +46,7 @@ public class CreateWall : MonoBehaviour
             if (values.Length == 0)
             {
                 sr.Close();
-                return;
+                return false;
             }
             source = sr.ReadLine();    // 한줄 읽는다.
             y--;
@@ -54,5 +54,6 @@ public class CreateWall : MonoBehaviour
         _wallObject.transform.SetParent(transform);
         _wallObject.transform.position = new Vector3(-values.Length / 2 * scale, -y * scale + YPos, transform.position.z);
         _wallObject.transform.localScale = new Vector3(scale, scale, scale);
+        return true;
     }
 }

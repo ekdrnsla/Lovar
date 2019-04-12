@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Message : MonoBehaviour
 {
     string[] setText = new string[2]{
-            "곧 벽이 생성됩니다",
+            "곧 벽이 다가옵니다",
             "준비하세요"
             };
     Text messageText;

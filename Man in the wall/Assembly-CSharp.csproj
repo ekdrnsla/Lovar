@@ -63,13 +63,13 @@
      <Compile Include="Assets\OceanMap\Resources\Scripts\BGMManager.cs" />
      <Compile Include="Assets\OceanMap\Resources\Scripts\BGMPlayer.cs" />
      <Compile Include="Assets\OceanMap\Resources\Scripts\ButtonEvent.cs" />
-     <Compile Include="Assets\OceanMap\Resources\Scripts\CreateNewWall.cs" />
      <Compile Include="Assets\OceanMap\Resources\Scripts\CreateWall.cs" />
      <Compile Include="Assets\OceanMap\Resources\Scripts\Floater.cs" />
      <Compile Include="Assets\OceanMap\Resources\Scripts\GameManager.cs" />
      <Compile Include="Assets\OceanMap\Resources\Scripts\Message.cs" />
      <Compile Include="Assets\OceanMap\Resources\Scripts\PlayerCollision.cs" />
      <Compile Include="Assets\OceanMap\Resources\Scripts\PlayerMove.cs" />
+     <Compile Include="Assets\OceanMap\Resources\Scripts\Shark.cs" />
      <Compile Include="Assets\OceanMap\Resources\Scripts\test.cs" />
      <Compile Include="Assets\OceanMap\Resources\Scripts\WallGenerator.cs" />
      <Compile Include="Assets\OceanMap\Resources\Scripts\WallMover.cs" />
@@ -77,6 +77,7 @@
      <Compile Include="Assets\OceanMap\Resources\Scripts\Yachts.cs" />
      <None Include="Assets\OceanMap\Resources\Data\data2.txt" />
      <None Include="Assets\OceanMap\Resources\Data\data.txt" />
+     <None Include="Assets\OceanMap\Resources\Textures\waterwornstone1_Unity\About these PBR files.txt" />
      <None Include="Assets\OceanMap\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
  <Reference Include="Unity.RenderPipelines.Core.Editor">
  <HintPath>C:/Users/BIT/Documents/Lovar/Man in the wall/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
