@@ -12,6 +12,7 @@ public class WallMover : MonoBehaviour
     public float offset = 0.1f;
     CreateWall createWallObj;
     Animator animator;
+    GameObject playerObj;
 
     // Start is called before the first frame update
     void Start()
@@ -22,18 +23,19 @@ public class WallMover : MonoBehaviour
         gameObject.GetComponent<Rigidbody>().useGravity = false;
         createWallObj = FindObjectOfType<CreateWall>();
         animator = GetComponent<Animator>();
+        playerObj = GameObject.Find("player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!CreateNewWallDelay && !createWallObj._wallObject && Input.GetButton("Jump") && transform.position.z >= ZPosition) StartCoroutine(CreateNewWall());
+        if (!CreateNewWallDelay && !createWallObj._wallObject && Input.GetButton("Jump") && transform.position.z >= ZPosition && playerObj.transform.position.y >= 0) StartCoroutine(CreateNewWall());
         if (transform.localScale.x <= offset) isMoving = true;
 
-        if (transform.position.z > -ZPosition / 2 && isMoving)
+        if (transform.position.z > -ZPosition / 4 && isMoving)
         {
             gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, -speed * Time.deltaTime);
-            if (transform.position.z < -ZPosition / 2.5f)
+            if (transform.position.z < -ZPosition / 4.5f)
             {
                 animator.SetBool("isGo", false);
                 Destroy(createWallObj._wallObject);

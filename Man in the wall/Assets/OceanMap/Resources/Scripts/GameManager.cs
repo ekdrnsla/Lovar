@@ -7,12 +7,13 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // GameObject.Find("UI").GetComponentInChildren
+        // Destroy(GameObject.Find("Love(Clone)"));
+        // GameObject.Find("Love(Clone)");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // if(GameObject.Find("player").transform.position.y)
     }
 }

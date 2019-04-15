@@ -66,9 +66,11 @@
      <Compile Include="Assets\OceanMap\Resources\Scripts\CreateWall.cs" />
      <Compile Include="Assets\OceanMap\Resources\Scripts\Floater.cs" />
      <Compile Include="Assets\OceanMap\Resources\Scripts\GameManager.cs" />
+     <Compile Include="Assets\OceanMap\Resources\Scripts\Life.cs" />
      <Compile Include="Assets\OceanMap\Resources\Scripts\Message.cs" />
      <Compile Include="Assets\OceanMap\Resources\Scripts\PlayerCollision.cs" />
      <Compile Include="Assets\OceanMap\Resources\Scripts\PlayerMove.cs" />
+     <Compile Include="Assets\OceanMap\Resources\Scripts\RetryMapName.cs" />
      <Compile Include="Assets\OceanMap\Resources\Scripts\Shark.cs" />
      <Compile Include="Assets\OceanMap\Resources\Scripts\test.cs" />
      <Compile Include="Assets\OceanMap\Resources\Scripts\WallGenerator.cs" />

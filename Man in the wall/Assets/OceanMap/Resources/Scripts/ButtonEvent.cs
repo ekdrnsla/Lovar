@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class ButtonEvent : MonoBehaviour
 {
-    public static string selectedMap;
+    public string selectedMap;
     GameObject menu;
     GameObject maps;
 
@@ -40,7 +40,6 @@ public class ButtonEvent : MonoBehaviour
             maps.SetActive(true);
             GameObject.Find("Man in the Wall").GetComponent<Text>().text = "Select Map";
             GameObject.Find("Man in the Wall").transform.Translate(0, 80, 0);
-            return;
         }
         else if (_buttonName == "back")
         {
@@ -48,25 +47,23 @@ public class ButtonEvent : MonoBehaviour
             maps.SetActive(false);
             GameObject.Find("Man in the Wall").GetComponent<Text>().text = "Man in the Wall";
             GameObject.Find("Man in the Wall").transform.Translate(0, -80, 0);
-            return;
         }
         else if (_buttonName == "exit")
         {
             Application.Quit();
-            return;
         }
         else if (_buttonName == "retry")
         {
             SceneManager.LoadScene(selectedMap);
-            return;
         }
         else if (_buttonName == "main")
         {
             SceneManager.LoadScene("Start");
-            return;
         }
-
-        SceneManager.LoadScene(_buttonName);
-        selectedMap = _buttonName;
+        else
+        {
+            SceneManager.LoadScene(_buttonName);
+            selectedMap = _buttonName;
+        }
     }
 }
