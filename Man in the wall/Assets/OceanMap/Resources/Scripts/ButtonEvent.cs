@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class ButtonEvent : MonoBehaviour
 {
-    public string selectedMap;
     GameObject menu;
     GameObject maps;
 
@@ -54,7 +53,7 @@ public class ButtonEvent : MonoBehaviour
         }
         else if (_buttonName == "retry")
         {
-            SceneManager.LoadScene(selectedMap);
+            SceneManager.LoadScene(RetryMapName.retryMapName);
         }
         else if (_buttonName == "main")
         {
@@ -63,7 +62,7 @@ public class ButtonEvent : MonoBehaviour
         else
         {
             SceneManager.LoadScene(_buttonName);
-            selectedMap = _buttonName;
+            RetryMapName.retryMapName = _buttonName;
         }
     }
 }

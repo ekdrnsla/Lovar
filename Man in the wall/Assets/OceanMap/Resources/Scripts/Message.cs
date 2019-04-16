@@ -5,13 +5,15 @@ using UnityEngine.UI;
 
 public class Message : MonoBehaviour
 {
-    string[] setText = new string[2]{
-            "곧 벽이 다가옵니다",
-            "준비하세요"
+    string[] setText = new string[]{
+            "준비가 되면",
+            "버튼을 눌러주세요"
             };
     Text messageText;
     bool isCreateWall = false;
     Color alpahColor;
+    CreateWall createWallObj;
+    IEnumerator readyMessageCoroutine;
 
     // Start is called before the first frame update
     void Start()
@@ -19,19 +21,30 @@ public class Message : MonoBehaviour
         messageText = GameObject.Find("message").GetComponentInChildren<Text>();
         alpahColor = new Color(0, 0, 0, 0);
         messageText.color = alpahColor;
+        createWallObj = FindObjectOfType<CreateWall>();
 
-        StartCoroutine(readyMessage(1));
+        readyMessageCoroutine = readyMessage(1);
+        StartCoroutine(readyMessageCoroutine);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (createWallObj._wallObject && !isCreateWall)
+        {
+            StopCoroutine(readyMessageCoroutine);
+            isCreateWall = true;
+        }
+        else if (!createWallObj._wallObject && isCreateWall)
+        {
+            StartCoroutine(readyMessageCoroutine);
+            isCreateWall = false;
+        }
     }
 
     IEnumerator readyMessage(float _sec)
     {
-        while (!isCreateWall)
+        while (true)
         {
             for (int i = 0; i < setText.Length; i++)
             {
