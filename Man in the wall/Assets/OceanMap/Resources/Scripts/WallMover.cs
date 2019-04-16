@@ -29,7 +29,8 @@ public class WallMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!CreateNewWallDelay && !createWallObj._wallObject && Input.GetButton("Jump") && transform.position.z >= ZPosition && playerObj.transform.position.y >= 0) StartCoroutine(CreateNewWall());
+        if (Input.GetButton("Jump") && !CreateNewWallDelay && !createWallObj._wallObject && playerObj.transform.position.y >= 0) StartCoroutine(CreateNewWall());
+        // if (Input.GetButton("Jump") && !CreateNewWallDelay && !createWallObj._wallObject && transform.position.z >= ZPosition && playerObj.transform.position.y >= 0) StartCoroutine(CreateNewWall());
         if (transform.localScale.x <= offset) isMoving = true;
 
         if (transform.position.z > -ZPosition / 4 && isMoving)

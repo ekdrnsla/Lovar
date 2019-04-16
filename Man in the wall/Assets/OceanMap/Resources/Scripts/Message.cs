@@ -32,6 +32,7 @@ public class Message : MonoBehaviour
     {
         if (createWallObj._wallObject && !isCreateWall)
         {
+            messageText.text = "";
             StopCoroutine(readyMessageCoroutine);
             isCreateWall = true;
         }
